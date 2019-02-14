@@ -16,7 +16,7 @@ Open database search, which enlarges precursor tolerances (e.g. to 500 Da) to in
 
 
 # How to Download
-Download the latest version [here](https://nesvilab.github.io/Crystal-C/releases/latest)
+Download the latest version [here](https://github.com/Nesvilab/Crystal-C/releases/latest)
 
 
 # Commands
