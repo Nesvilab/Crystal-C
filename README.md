@@ -1,5 +1,5 @@
 
-# Intruduction
+# Introduction
 Open database search, which enlarges precursor tolerances (e.g. to 500 Da) to include more possible modified peptide candidates, is a practical and efficient approach for elucidating the “dark matter” of proteomics, including chemical and biological peptide modifications. Nevertheless, this strategy considers only unmodified peptide sequences during protein database search, resulting in large mass shifts between precursor neutral masses and identified peptide masses. These mass shifts may correspond to true post-translational modifications (PTMs) or artifacts from missed cleavages, in-source decay, and co-fragmentation (i.e., chimeric spectra). We hereby implemented a bioinformatics tool that detects and corrects possible artifacts, improving the interpretability of the open search results.
 
 
