@@ -19,7 +19,9 @@ Open database search, which enlarges precursor tolerances (e.g. to 500 Da) to in
 `java -jar Crystal-C.jar Crystal-C.params PepXMLs`
 
 (For single pepXML)
+
 `java -Xmx8g -jar Crystal-C.jar Crystal-C.params test.pepXML`
 
 (For multiple pepXMLs)
+
 `java -Xmx8g -jar Crystal-C.jar Crystal-C.params *.pepXML`
