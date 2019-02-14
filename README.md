@@ -15,6 +15,10 @@ Open database search, which enlarges precursor tolerances (e.g. to 500 Da) to in
 * OutputFolder = D:\Test   # The folder for the newly generated pepXML files
 
 
+# How to Download
+Download the latest version [here](https://nesvilab.github.io/Crystal-C/releases/latest)
+
+
 # Commands
 `java -jar Crystal-C.jar Crystal-C.params PepXMLs`
 
