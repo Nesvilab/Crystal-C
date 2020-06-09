@@ -4,7 +4,7 @@
 
 
 
-# Workflow
+# General Workflow
 
 <img src="https://github.com/Nesvilab/Crystal-C/blob/master/CrystalC.png" height="40%" width="40%" title="General Workflow of Crystal-C">
 
