@@ -4,7 +4,11 @@
 
 
 # Parameters
-* thread = -1  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.
+| Parameter | Default Value |  Description |
+| --- | --- |
+| thread | -1 | Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.|
+
+
 * fasta = D:\test.fasta  &nbsp;&nbsp;&nbsp;&nbsp;# Protein Fasta File <br />
 * raw_file_location = D:\test &nbsp;&nbsp;&nbsp; # The dictionary where the raw data locates
 * raw_file_extension = mzML &nbsp;&nbsp;&nbsp;&nbsp;# The file extension of raw data
@@ -14,7 +18,7 @@
 * isotope_number = 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Number of theoretical isotope peaks need to be generated
 * precursor_mass = 20 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Precursor mass tolerance
 * precursor_isolation_window = 0.7 &nbsp;&nbsp;&nbsp;# Precursor Isolation Window 
-
+* correct_isotope_error = false &nbsp;&nbsp;&nbsp;&nbsp;# Correct isotope error or not
 
 
 # How to Download
@@ -28,7 +32,6 @@ For other tools developed by the Nesvizhskii lab, see our website www.nesvilab.o
 
 
 # Commands
-`java -jar Crystal-C.jar Crystal-C.params PepXMLs`
 
 (For single pepXML)
 
