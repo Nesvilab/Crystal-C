@@ -34,9 +34,9 @@ Download the latest version [here](https://github.com/Nesvilab/Crystal-C/release
 
 
 # How to Cite
-•	Chang HY, Kong AT, da Veiga Leprevost F, Avtonomov DM, Haynes SE, Nesvizhskii AI. Crystal-C: A Computational Tool for Refinement of Open Search Results. J Proteome Res. 2020. [Manuscript](https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.0c00119)
+Chang HY, Kong AT, da Veiga Leprevost F, Avtonomov DM, Haynes SE, Nesvizhskii AI. Crystal-C: A Computational Tool for Refinement of Open Search Results. J Proteome Res. 2020. [Manuscript](https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.0c00119)
 
-For other tools developed by the Nesvizhskii lab, see our website www.nesvilab.org.
+For other tools developed by the Nesvizhskii lab, see our website: www.nesvilab.org.
 
 
 
