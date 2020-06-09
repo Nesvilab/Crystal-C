@@ -43,7 +43,9 @@ For other tools developed by the Nesvizhskii lab, see our website: www.nesvilab.
 # Commands
 
 (For single pepXML)
+
 `java -Xmx8g -jar Crystal-C.jar Crystal-C.params test.pepXML`
 
 (For multiple pepXMLs)
+
 `java -Xmx8g -jar Crystal-C.jar Crystal-C.params *.pepXML`
