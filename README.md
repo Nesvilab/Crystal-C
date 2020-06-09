@@ -13,6 +13,7 @@
 
 
 # Parameters
+
 | Parameter | Description |
 | ------------- | ------------- |
 | thread | Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.|
