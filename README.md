@@ -3,26 +3,33 @@
   Shotgun proteomics using liquid chromatography coupled to mass spectrometry (LC-MS) is commonly used to identify peptides containing post-translational modifications. With the emergence of fast database search tools such as MSFragger, the approach of enlarging precursor mass tolerances during the search (termed “open search”) has been increasingly used for comprehensive characterization of post-translational and chemical modifications of protein samples. However, not all mass shifts detected using the open search strategy represent true modifications, as artifacts exist from sources such as unaccounted missed cleavages or peptide co-fragmentation (chimeric MS/MS spectra). Here, we present Crystal-C, a computational tool that detects and removes such artifacts from open search results. Our analysis using Crystal-C shows that, in a typical shotgun proteomics data set, the number of such observations is relatively small. Nevertheless, removing these artifacts helps to simplify the interpretation of the mass shift histograms, which in turn should improve the ability of open search-based tools to detect potentially interesting mass shifts for follow-up investigation.
 
 
+
+# Workflow
+
+
+**Figure.** Workflow of Crystal-C as applied to each PSM from open search results. (A) Find potential missed cleavage sites by searching the previous and next fully enzymatic peptides of the identified peptide, where MTol is the mass tolerance (20 ppm by default), ME is the precursor neutral mass, MT is the identified peptide mass, and MP and MN are the previous and next adjacent fully enzymatic peptide masses, respectively. (B) Check whether the PSM is semi-enzymatic by deleting one amino acid from the left or right side of the identified peptide sequence at a time and calculating the mass difference betweenME and the remaining peptide sequence. If the mass difference is smaller than MTol, the remaining peptide sequence is regarded as semi-enzymatic. (C) Find chimeric MS/MS spectra. Crystal-C searches for peaks from the identified peptide within the isolation window by comparing theoretical isotopic clusters (purple) to the MS1 spectrum. If a peak matching one of the theoretical isotope clusters is found in the isolation window and does not belong to the precursor, the PSM is considered chimeric.
+
+
+
 # Parameters
-| Parameter | Default Value |  Description |
-| --------- | ------------- |------------- |
-| thread | -1 | Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.|
+| Parameter | Description |
+| --------- | ------------- |
+| thread | Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.|
+| fasta | Protein Fasta File |
+| raw_file_location | The dictionary where the raw data locates |
+| raw_file_extension | The file extension of raw data |
+| output_location | The folder for the newly generated pepXML files |
+| precursor_charge | The precursor charge state range |
+| isotope_number | Number of theoretical isotope peaks need to be generated |
+| precursor_mass | Precursor mass tolerance (unit: ppm) |
+| precursor_isolation_window | Precursor Isolation Window (unit: Da.) |
+| correct_isotope_error | Correct isotope error or not |
 
-
-* fasta = D:\test.fasta  &nbsp;&nbsp;&nbsp;&nbsp;# Protein Fasta File <br />
-* raw_file_location = D:\test &nbsp;&nbsp;&nbsp; # The dictionary where the raw data locates
-* raw_file_extension = mzML &nbsp;&nbsp;&nbsp;&nbsp;# The file extension of raw data
-* output_location = D:\Test &nbsp;&nbsp;&nbsp;&nbsp;# The folder for the newly generated pepXML files
-
-* precursor_charge = 1 6 &nbsp;&nbsp;&nbsp;&nbsp;# The precursor charge state range
-* isotope_number = 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Number of theoretical isotope peaks need to be generated
-* precursor_mass = 20 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Precursor mass tolerance
-* precursor_isolation_window = 0.7 &nbsp;&nbsp;&nbsp;# Precursor Isolation Window 
-* correct_isotope_error = false &nbsp;&nbsp;&nbsp;&nbsp;# Correct isotope error or not
 
 
 # How to Download
 Download the latest version [here](https://github.com/Nesvilab/Crystal-C/releases/latest)
+
 
 
 # How to Cite
@@ -31,12 +38,11 @@ Download the latest version [here](https://github.com/Nesvilab/Crystal-C/release
 For other tools developed by the Nesvizhskii lab, see our website www.nesvilab.org.
 
 
+
 # Commands
 
 (For single pepXML)
-
 `java -Xmx8g -jar Crystal-C.jar Crystal-C.params test.pepXML`
 
 (For multiple pepXMLs)
-
 `java -Xmx8g -jar Crystal-C.jar Crystal-C.params *.pepXML`
