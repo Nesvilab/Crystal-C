@@ -4,8 +4,8 @@
 
 
 # Parameters
-* thread = -1                             # Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.
-* fasta = D:\test.fasta                   # Protein Fasta File
+* thread = -1                             # Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing. <br />
+* fasta = D:\test.fasta                   # Protein Fasta File <br />
 * raw_file_location = D:\test             # The dictionary where the raw data locates
 * raw_file_extension = mzML               # The file extension of raw data
 * output_location = D:\Test               # The folder for the newly generated pepXML files
