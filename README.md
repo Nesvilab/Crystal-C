@@ -43,10 +43,6 @@ For other tools developed by the Nesvizhskii lab, see our website: www.nesvilab.
 
 # Commands
 
-(For single pepXML)
+(for mzML files) `java -Xmx53G -cp "CrystalC-1.2.1.jar" crystalc.Run crystalc.params *.pepXML`
 
-`java -Xmx8g -jar Crystal-C.jar Crystal-C.params test.pepXML`
-
-(For multiple pepXMLs)
-
-`java -Xmx8g -jar Crystal-C.jar Crystal-C.params *.pepXML`
+(for Thermo RAW files) `java -Dbatmass.io.libs.thermo.dir="D:\MSFragger-3.0\ext\thermo" -Xmx53G -cp "CrystalC-1.2.1.jar" crystalc.Run crystalc.params *.pepXML`
