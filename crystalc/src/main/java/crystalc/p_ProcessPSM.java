@@ -44,14 +44,14 @@ public class p_ProcessPSM
         result = FindMissedCleavagePeptides(inp.fastaMap, psm.ProteinAceNo, psm.PepSeq, psm.TheoPepMass, TargetMass, inp.aa.AAMonoMassMap, psm.MassAbsThreshold, inp.CleavageSites, inp.CleavageInhibitors);
 
         //Check missed cleavage peptides using AlternativeProteins
-        if((result == "") && (psm.AlternativeProteins != ""))
+        if((result.isEmpty()) && (!psm.AlternativeProteins.isEmpty()))
         {
             double MinMassDif = 10000000;
             String[] AlterProteinAry = psm.AlternativeProteins.split(",");
             for(String apStr : AlterProteinAry)
             {
                 String outStr = FindMissedCleavagePeptides(inp.fastaMap, apStr.trim(), psm.PepSeq, psm.TheoPepMass, TargetMass, inp.aa.AAMonoMassMap, psm.MassAbsThreshold, inp.CleavageSites, inp.CleavageInhibitors);
-                if(outStr != "")
+                if(!outStr.isEmpty())
                 {
                     String[] tStrAry = outStr.split("[$\\@]");
                     double MassDif = Double.parseDouble(tStrAry[1]);
@@ -134,8 +134,8 @@ public class p_ProcessPSM
         }
 
         //Calculate delta mass
-        double rPepMonoMass = rPepSeq!=""? p_Operator.CalculatePepMonoMass(rPepSeq, AAMonoMassMap) : 0f;
-        double lPepMonoMass = lPepSeq!=""? p_Operator.CalculatePepMonoMass(lPepSeq, AAMonoMassMap) : 0f;
+        double rPepMonoMass = !rPepSeq.isEmpty()? p_Operator.CalculatePepMonoMass(rPepSeq, AAMonoMassMap) : 0f;
+        double lPepMonoMass = !lPepSeq.isEmpty()? p_Operator.CalculatePepMonoMass(lPepSeq, AAMonoMassMap) : 0f;
 
         //Check if there is at least one missed cleavage peptides
         double lMassDif = Math.abs(lPepMonoMass + TheoPepMass - ExpPepMass);
@@ -220,7 +220,7 @@ public class p_ProcessPSM
         }
 
         //List all possible peptides
-        if(lPepSeq != "")
+        if(!lPepSeq.isEmpty())
         {
             //Find the previous and next amino acid
             String PreviousAA = (lPepSeq.length() < PepSeq.length())? String.valueOf(PepSeq.charAt(PepSeq.length() - lPepSeq.length() - 1))  :"-";
@@ -229,7 +229,7 @@ public class p_ProcessPSM
             //result += lPepSeq + "~" + MinLMassDif + "~" + p_Operator.CalculatePepMonoMass(lPepSeq, AAMonoMassMap) + "~" + PreviousAA + "~" + NextAA + "~-~false" + "&";
             result += lPepSeq + "~" + MinLMassDif + "~" + (MinLMassDif+ExpPepMass) + "~" + PreviousAA + "~" + NextAA + "~-~false" + "&";
         }
-        if(rPepSeq != "")
+        if(!rPepSeq.isEmpty())
         {
             String PreviousAA = "-";
             String NextAA = (rPepSeq.length() < PepSeq.length()) ? String.valueOf(PepSeq.charAt(rPepSeq.length())) : "-";
@@ -238,7 +238,7 @@ public class p_ProcessPSM
             result += rPepSeq + "~" + MinRMassDif +"~" + (MinRMassDif+ExpPepMass) + "~" + PreviousAA + "~" + NextAA + "~-~false" +  "&";
         }
 
-        if(bestResult != "")
+        if(!bestResult.isEmpty())
         {
             result = bestResult + "$" + result;
         }
@@ -411,7 +411,7 @@ public class p_ProcessPSM
         }
 
         //List all possible peptides
-        if(lPepSeq != "")
+        if(!lPepSeq.isEmpty())
         {
             //Find the previous and next amino acid
             String PreviousAA = ProtSeq.indexOf(lPepSeq)>0?String.valueOf(ProtSeq.charAt(ProtSeq.indexOf(lPepSeq)-1)):"-";
@@ -420,7 +420,7 @@ public class p_ProcessPSM
             result += lPepSeq + "~" + MinLMassDif + "~" + (psm.TheoPepMass+p_Operator.CalculatePepMonoMass(lAddSeq, inp.aa.AAMonoMassMap))
                     + "~" + PreviousAA + "~" + NextAA + "~-~false" + "&";
         }
-        if(rPepSeq != "")
+        if(!rPepSeq.isEmpty())
         {
             String PreviousAA = "-";
             String NextAA = (ProtSeq.indexOf(rPepSeq)+rPepSeq.length()<ProtSeq.length())?String.valueOf(ProtSeq.charAt(ProtSeq.indexOf(rPepSeq)+rPepSeq.length())):"-";
@@ -429,7 +429,7 @@ public class p_ProcessPSM
                     + "~" + PreviousAA + "~" + NextAA + "~-~false" +  "&";
         }
 
-        if(bestResult != "")
+        if(!bestResult.isEmpty())
         {
             result = bestResult + "$" + result;
         }

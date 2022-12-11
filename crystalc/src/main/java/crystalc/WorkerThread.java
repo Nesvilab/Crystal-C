@@ -48,7 +48,7 @@ public class WorkerThread implements Callable<ds_PSM>
             String[] sAry = AlProtein.getProtein().split(" ");
             AlproteinStr += sAry[0] + ",";
         }
-        this._psm.AlternativeProteins = (AlproteinStr == "") ? "" : AlproteinStr.substring(0, AlproteinStr.lastIndexOf(','));
+        this._psm.AlternativeProteins = (AlproteinStr.isEmpty()) ? "" : AlproteinStr.substring(0, AlproteinStr.lastIndexOf(','));
         this._psm.MassAbsThreshold = (this._psm.ObvPepMass * inp.MassTol);
 
         this._templates = templates;
@@ -98,10 +98,10 @@ public class WorkerThread implements Callable<ds_PSM>
                     resultStr = p_ProcessPSM.CheckMissedCleavagePeptides(this._inp, this._psm, this._psm.ObvPepMass);
 
                     if(this._psm.UsePredictedMz) { //Using predicted Mz
-                        resultStr = (resultStr != "") ?  (resultStr+"$(ExpMass)") : p_ProcessPSM.CheckMissedCleavagePeptides(this._inp, this._psm, this._psm.IsotopeCluster.PredictMonoMass);
+                        resultStr = (!resultStr.isEmpty()) ?  (resultStr+"$(ExpMass)") : p_ProcessPSM.CheckMissedCleavagePeptides(this._inp, this._psm, this._psm.IsotopeCluster.PredictMonoMass);
                     }
 
-                    if(resultStr != "")
+                    if(!resultStr.isEmpty())
                     {
                         String[] strAry = resultStr.split("[$\\@]");
                         this._psm.NewPepSeq = strAry[0];
@@ -124,7 +124,7 @@ public class WorkerThread implements Callable<ds_PSM>
                 {
                     //region Check nonspecific peptides
                     resultStr = p_ProcessPSM.CheckNonSpecificPeptides(this._inp, this._psm);
-                    if(resultStr != "")
+                    if(!resultStr.isEmpty())
                     {
                         String[] strAry = resultStr.split("[$\\@]");
                         this._psm.NewPepSeq = strAry[0];
@@ -142,11 +142,11 @@ public class WorkerThread implements Callable<ds_PSM>
                     resultStr = p_ProcessPSM.CheckSemiTrypticPeptides(this._psm.PepSeq, this._psm.TheoPepMass, this._psm.ObvPepMass, this._psm.MassAbsThreshold, this._inp.aa.AAMonoMassMap);
 
                     if(this._psm.UsePredictedMz) { //Using predicted Mz
-                        resultStr =  (resultStr != "") ?  (resultStr+"$(ExpMass)") : p_ProcessPSM.CheckSemiTrypticPeptides(this._psm.PepSeq, this._psm.TheoPepMass,
+                        resultStr =  (!resultStr.isEmpty()) ?  (resultStr+"$(ExpMass)") : p_ProcessPSM.CheckSemiTrypticPeptides(this._psm.PepSeq, this._psm.TheoPepMass,
                                 this._psm.IsotopeCluster.PredictMonoMass, this._psm.MassAbsThreshold, this._inp.aa.AAMonoMassMap);
                     }
 
-                    if(resultStr != "")
+                    if(!resultStr.isEmpty())
                     {
                         String[] strAry = resultStr.split("[$\\@]");
                         this._psm.NewPepSeq = strAry[0];
@@ -167,7 +167,7 @@ public class WorkerThread implements Callable<ds_PSM>
                 }
             }
 
-            if ((resultStr == "") && (PrecursorScanNum>=0))
+            if ((resultStr.isEmpty()) && (PrecursorScanNum>=0))
             {
                 IScan PrecursorScan = this._scans.getScanByNum(PrecursorScanNum);
 

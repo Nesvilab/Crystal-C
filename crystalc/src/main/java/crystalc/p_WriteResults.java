@@ -392,7 +392,7 @@ public class p_WriteResults
                                     nindLi.add(ind-dif);
                                 }
                             }
-                            localization=(ltmp!="")?ltmp.substring(0,ltmp.length()-1):"";
+                            localization=(!ltmp.isEmpty())?ltmp.substring(0,ltmp.length()-1):"";
 
                             String ptmp="";
                             char[] cAry=NewPepSeq.toCharArray();
