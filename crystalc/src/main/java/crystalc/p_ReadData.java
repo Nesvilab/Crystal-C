@@ -87,7 +87,7 @@ public class p_ReadData
             }
             br.close();
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             e.printStackTrace();
             System.exit(1);
@@ -135,7 +135,7 @@ public class p_ReadData
             KeyStr = KeyStr.replace(">", "");
             fastaMap.put(KeyStr, ValueStr);
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             e.printStackTrace();
             System.exit(1);

@@ -107,6 +107,7 @@ public class Run
         catch(Exception e)
         {
             System.out.println("Please check if there are MS1 spectra in raw or mzML files.");
+            e.printStackTrace();
             System.exit(1);
         }
 

@@ -248,7 +248,7 @@ public class p_WriteResults
                                     }
                                     catch(Exception e)
                                     {
-                                        System.out.println(e);
+                                        e.printStackTrace();
                                         System.exit(1);
                                     }
                                 }
@@ -281,7 +281,8 @@ public class p_WriteResults
             writer.close();
         }
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
+            System.exit(1);
         }
     }
 
@@ -419,7 +420,7 @@ public class p_WriteResults
             writer.writeCharacters(System.getProperty("line.separator"));
         }
         catch(Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             System.exit(1);
         }
     }
