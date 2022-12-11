@@ -1,0 +1,14 @@
+# Crystal-C (Version: 2022.10)
+
+thread = -1                          # Number of threads. "-1" means that Crystal-C automatically uses (total number of threads - 1) in your computer for processing.
+fasta = D:\Test.fasta                # Protein Fasta File
+raw_file_location = D:\Test          # The dictionary where the raw data locates
+raw_file_extension = mzML            # The file extension of raw data
+output_location = D:\Test            # The folder for the newly generated pepXML files
+
+precursor_charge = 1 6               # The precursor charge state range
+isotope_number = 3                   # Number of theoretical isotope peaks need to be generated
+precursor_mass = 20.0                # Precursor mass tolerance (unit: ppm)
+precursor_isolation_window = 0.7     # Precursor Isolation Window (unit: Da.)
+correct_isotope_error = false        # Correct isotope error or not
+

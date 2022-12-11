@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.s9258029</groupId>
+    <artifactId>crystalc</artifactId>
+    <version>1.5.0</version>
+
+    <properties>
+        <source.version>9</source.version>
+        <target.version>9</target.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>disable-java9-doclint</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <properties>
+                <additionalparam>-Xdoclint:none</additionalparam>
+            </properties>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>lib</id>
+            <url>file:///${project.basedir}/../lib</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.chhh</groupId>
+            <artifactId>grppr</artifactId>
+            <version>3.18</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.chhh</groupId>
+            <artifactId>batmass-io</artifactId>
+            <version>1.25.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- "java.xml.bind" is removed from Java 9+. Need to add JAXB API + implementation. -->
+        <!-- JAXB 2.3.x for jdk9+ -->
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!-- JAXB needs javax.activation module (jdk9) -->
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.chhh</groupId>
+            <artifactId>msftbx</artifactId>
+            <version>1.8.6</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${source.version}</source>
+                    <target>${target.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>crystalc.Run</mainClass>
+                        </manifest>
+
+                        <manifestEntries>
+                            <Class-Path>common-deps.jar</Class-Path>
+                        </manifestEntries>
+
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Package everything in one jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <!-- Run shade goal on package phase -->
+                    <execution>
+                        <!--<phase>install</phase>-->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <minimizeJar>true</minimizeJar>
+                            <filters>
+                                <filter>
+                                    <artifact>org.slf4j:slf4j-simple</artifact>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </filter>
+                                <filter>
+                                    <artifact>com.google.guava:guava</artifact>
+                                    <includes>
+                                        <include>com/google/common/base/**</include>
+                                        <include>com/google/common/cache/**</include>
+                                    </includes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.glassfish.jaxb:jaxb-runtime</artifact>
+                                    <includes><include>**</include></includes>
+                                </filter>
+                                <filter>
+                                    <artifact>org.glassfish.jaxb:jaxb-runtime</artifact>
+                                    <includes><include>**</include></includes>
+                                </filter>
+                                <!-- START DEPS of Glassfish-JAXB -->
+                                <filter>
+                                    <artifact>com.sun.istack:istack-commons-runtime</artifact>
+                                    <includes><include>**</include></includes>
+                                </filter>
+                                <!-- END   DEPS of Glassfish-JAXB -->
+                                <filter>
+                                    <artifact>javax.activation:javax.activation-api</artifact>
+                                    <includes><include>**</include></includes>
+                                </filter>
+                            </filters>
+
+                            <transformers>
+                                <!-- add Run-Class to manifest file -->
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>crystalc.Run</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--install msftbx-grpc from the 'lib' directory into local maven repo on 'clean' task-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-external</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${basedir}/lib/batmass-io-1.25.5.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.github.chhh</groupId>
+                            <artifactId>batmass-io</artifactId>
+                            <version>1.25.5</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>
