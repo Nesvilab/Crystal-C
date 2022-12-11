@@ -27,13 +27,6 @@
         </profile>
     </profiles>
 
-    <repositories>
-        <repository>
-            <id>lib</id>
-            <url>file:///${project.basedir}/../lib</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>com.github.chhh</groupId>
@@ -174,6 +167,22 @@
                             <groupId>com.github.chhh</groupId>
                             <artifactId>batmass-io</artifactId>
                             <version>1.28.8</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>install-external-2</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <file>${basedir}/lib/grppr-3.18.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.github.chhh</groupId>
+                            <artifactId>grppr</artifactId>
+                            <version>3.18</version>
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                         </configuration>
