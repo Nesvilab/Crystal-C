@@ -376,7 +376,7 @@ public class p_WriteResults
                     String localization_peptide = ptm.getLocalizationPeptide();
                     if(!sh.getPeptide().equalsIgnoreCase(NewPepSeq))
                     {
-                        if(ptm.getLocalization()==""){
+                        if(ptm.getLocalization().isEmpty()){
                             localization_peptide = NewPepSeq;
                         }
                         else{
