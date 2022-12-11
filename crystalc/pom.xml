@@ -35,23 +35,10 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.25</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>com.github.chhh</groupId>
             <artifactId>batmass-io</artifactId>
             <version>1.28.8</version>
             <scope>compile</scope>
-        </dependency>
-        <!-- "java.xml.bind" is removed from Java 9+. Need to add JAXB API + implementation. -->
-        <!-- JAXB 2.3.x for jdk9+ -->
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.1</version>
         </dependency>
     </dependencies>
 
