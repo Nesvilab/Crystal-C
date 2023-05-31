@@ -101,7 +101,7 @@ public class p_WriteResults
             Path path = Paths.get(inp.OutputFolder +File.separator+InputFile.getName().replaceAll(".pepXML", "_c.pepXML"));
             OutputStream os = new BufferedOutputStream(Files.newOutputStream(path));
 
-            XMLOutputFactory outputFactory = XMLOutputFactory.newFactory();
+            XMLOutputFactory outputFactory = XMLOutputFactory.newDefaultFactory();
             XMLStreamWriter writer = null;
             writer = outputFactory.createXMLStreamWriter(os, "utf-8");
             writer.writeStartDocument("utf-8", "1.0");
