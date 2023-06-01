@@ -62,7 +62,7 @@ public class Run
 
         for(File InputFile : FileLi){
             String FileExtension = InputFile.getName().substring(InputFile.getName().lastIndexOf('.'));
-            if(FileExtension.equalsIgnoreCase(".pepXML") && !InputFile.getName().endsWith("_c.pepXML")){
+            if(FileExtension.equalsIgnoreCase(".pepXML")){
                 ProcessPepXML(inp, InputFile, templates);
             }
         }
