@@ -232,8 +232,8 @@ public class p_WriteResults
                         writer.writeAttribute("uncalibrated_precursor_neutral_mass", df.format(psm.spectrum.getUncalibratedPrecursorNeutralMass()));
                     }
                     writer.writeAttribute("assumed_charge", String.valueOf(psm.NewZ));
-                    if(psm.spectrum.getNativeId()!=null){
-                        writer.writeAttribute("native_id", psm.spectrum.getNativeId());
+                    if(psm.spectrum.getSpectrumNativeID()!=null){
+                        writer.writeAttribute("spectrumNativeID", psm.spectrum.getSpectrumNativeID());
                     }
                     writer.writeAttribute("spectrum", psm.spectrum.getSpectrum());
                     writer.writeAttribute("end_scan", String.valueOf(psm.spectrum.getEndScan()));
@@ -391,7 +391,6 @@ public class p_WriteResults
                 List<PtmResult> ptmLi = sh.getPtmResult();
                 for(PtmResult ptm : ptmLi)
                 {
-                    String localization = ptm.getLocalization();
                     String localization_peptide = ptm.getLocalizationPeptide();
                     if(!sh.getPeptide().equalsIgnoreCase(NewPepSeq))
                     {
@@ -400,18 +399,15 @@ public class p_WriteResults
                         }
                         else{
                             int[] indAry= Arrays.stream(ptm.getLocalization().split("_")).mapToInt(Integer::parseInt).toArray();
-                            List<Integer> nindLi=new ArrayList<Integer>();
+                            List<Integer> nindLi=new ArrayList<>();
                             int index = CheckModPos(String.valueOf(sh.getPeptide()), NewPepSeq, indAry[0]);
                             int dif = (index!=99999999)? (indAry[0]-index):(sh.getPeptide().indexOf(NewPepSeq));
-                            String ltmp="";
                             for(int ind : indAry){
                                 if(ind-dif>0)
                                 {
-                                    ltmp+=(ind-dif)+"_";
                                     nindLi.add(ind-dif);
                                 }
                             }
-                            localization=(!ltmp.isEmpty())?ltmp.substring(0,ltmp.length()-1):"";
 
                             String ptmp="";
                             char[] cAry=NewPepSeq.toCharArray();
@@ -423,13 +419,21 @@ public class p_WriteResults
                     }
 
                     writer.writeEmptyElement("ptm_result");
-                    writer.writeAttribute("localization", localization);
-                    writer.writeAttribute("best_score_with_ptm", ptm.getBestScoreWithPtm().toString());
-                    writer.writeAttribute("score_without_ptm", ptm.getScoreWithoutPtm().toString());
-                    if(ptm.getLocalizationPeptide()!=null){
+                    writer.writeAttribute("best_position", ptm.getBestPosition());
+                    writer.writeAttribute("score_shifted_all_positions", String.valueOf(ptm.getScoreShiftedAllPositions()));
+                    writer.writeAttribute("position_scores", ptm.getPositionScores());
+                    writer.writeAttribute("ions_all_unshifted", String.valueOf(ptm.getIonsAllUnshifted()));
+                    writer.writeAttribute("ions_best_position", String.valueOf(ptm.getIonsBestPosition()));
+                    writer.writeAttribute("ions_second_best_position", String.valueOf(ptm.getIonsSecondBestPosition()));
+                    writer.writeAttribute("ions_shifted_all_positions", String.valueOf(ptm.getIonsShiftedAllPositions()));
+                    writer.writeAttribute("score_shifted_best_position", String.valueOf(ptm.getScoreShiftedBestPosition()));
+                    writer.writeAttribute("ions_shifted_best_position", String.valueOf(ptm.getIonsShiftedBestPosition()));
+                    writer.writeAttribute("score_best_position", ptm.getScoreBestPosition().toString());
+                    writer.writeAttribute("score_all_unshifted", ptm.getScoreAllUnshifted().toString());
+                    if (ptm.getLocalizationPeptide() != null) {
                         writer.writeAttribute("localization_peptide",localization_peptide);
                     }
-                    writer.writeAttribute("second_best_score_with_ptm", ptm.getSecondBestScoreWithPtm().toString());
+                    writer.writeAttribute("score_second_best_position", ptm.getScoreSecondBestPosition().toString());
                     writer.writeAttribute("ptm_mass", ptm.getPtmMass().toString());
                     writer.writeCharacters(System.getProperty("line.separator"));
                 }
