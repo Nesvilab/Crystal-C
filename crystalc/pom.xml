@@ -92,41 +92,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
-                            <filters>
-                                <filter>
-                                    <artifact>org.slf4j:slf4j-simple</artifact>
-                                    <includes>
-                                        <include>**</include>
-                                    </includes>
-                                </filter>
-                                <filter>
-                                    <artifact>com.google.guava:guava</artifact>
-                                    <includes>
-                                        <include>com/google/common/base/**</include>
-                                        <include>com/google/common/cache/**</include>
-                                    </includes>
-                                </filter>
-                                <filter>
-                                    <artifact>org.glassfish.jaxb:jaxb-runtime</artifact>
-                                    <includes><include>**</include></includes>
-                                </filter>
-                                <filter>
-                                    <artifact>org.glassfish.jaxb:jaxb-runtime</artifact>
-                                    <includes><include>**</include></includes>
-                                </filter>
-                                <!-- START DEPS of Glassfish-JAXB -->
-                                <filter>
-                                    <artifact>com.sun.istack:istack-commons-runtime</artifact>
-                                    <includes><include>**</include></includes>
-                                </filter>
-                                <!-- END   DEPS of Glassfish-JAXB -->
-                                <filter>
-                                    <artifact>javax.activation:javax.activation-api</artifact>
-                                    <includes><include>**</include></includes>
-                                </filter>
-                            </filters>
-
                             <transformers>
                                 <!-- add Run-Class to manifest file -->
                                 <transformer
