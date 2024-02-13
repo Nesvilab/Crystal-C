@@ -37,7 +37,7 @@
         <dependency>
             <groupId>com.github.chhh</groupId>
             <artifactId>batmass-io</artifactId>
-            <version>1.30.2</version>
+            <version>1.31.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -114,11 +114,11 @@
                         <id>install-external</id>
                         <phase>clean</phase>
                         <configuration>
-                            <file>${basedir}/lib/batmass-io-1.30.2.jar</file>
+                            <file>${basedir}/lib/batmass-io-1.31.2.jar</file>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>com.github.chhh</groupId>
                             <artifactId>batmass-io</artifactId>
-                            <version>1.30.2</version>
+                            <version>1.31.2</version>
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                         </configuration>
