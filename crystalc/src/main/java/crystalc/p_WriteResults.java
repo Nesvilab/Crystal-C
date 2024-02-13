@@ -419,7 +419,6 @@ public class p_WriteResults
                     }
 
                     writer.writeEmptyElement("ptm_result");
-                    writer.writeAttribute("best_position", ptm.getBestPosition());
                     writer.writeAttribute("score_shifted_all_positions", String.valueOf(ptm.getScoreShiftedAllPositions()));
                     writer.writeAttribute("position_scores", ptm.getPositionScores());
                     writer.writeAttribute("ions_all_unshifted", String.valueOf(ptm.getIonsAllUnshifted()));
