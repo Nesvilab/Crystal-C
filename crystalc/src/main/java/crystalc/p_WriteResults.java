@@ -395,6 +395,12 @@ public class p_WriteResults
                     if (ptm.getLocalization() != null) {
                         writer.writeAttribute("localization", ptm.getLocalization());
                     }
+                    if (ptm.getBestPositions() != null) {
+                        writer.writeAttribute("best_positions", ptm.getBestPositions());
+                    }
+                    if (ptm.getNumberBestPositions() != null) {
+                        writer.writeAttribute("number_best_positions", ptm.getNumberBestPositions().toString());
+                    }
                     if (ptm.getBestScoreWithPtm() != null) {
                         writer.writeAttribute("best_score_with_ptm", ptm.getBestScoreWithPtm().toString());
                     }
