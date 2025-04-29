@@ -13,7 +13,7 @@
         <target.version>9</target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <ver.batmass.io>1.32.5</ver.batmass.io>
+        <ver.batmass.io>1.35.1</ver.batmass.io>
     </properties>
 
     <profiles>
