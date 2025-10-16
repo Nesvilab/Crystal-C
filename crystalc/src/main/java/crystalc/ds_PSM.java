@@ -19,6 +19,7 @@
 
 package crystalc;
 
+import java.util.Set;
 import umich.ms.fileio.filetypes.pepxml.jaxb.standard.SpectrumQuery;
 
 public class ds_PSM
@@ -32,7 +33,7 @@ public class ds_PSM
     public double ObvPepMass;
     public double TheoPepMass;
     public String ProteinAceNo;
-    public String AlternativeProteins;
+    public Set<String> AlternativeProteins;
     public double MassAbsThreshold;
     public SpectrumQuery spectrum;
 

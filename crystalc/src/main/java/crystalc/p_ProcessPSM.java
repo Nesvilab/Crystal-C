@@ -66,10 +66,9 @@ public class p_ProcessPSM
         if((result.isEmpty()) && (!psm.AlternativeProteins.isEmpty()))
         {
             double MinMassDif = 10000000;
-            String[] AlterProteinAry = psm.AlternativeProteins.split(",");
-            for(String apStr : AlterProteinAry)
+            for(String apStr : psm.AlternativeProteins)
             {
-                String outStr = FindMissedCleavagePeptides(inp.fastaMap, apStr.trim(), psm.PepSeq, psm.TheoPepMass, TargetMass, inp.aa.AAMonoMassMap, psm.MassAbsThreshold, inp.CleavageSites, inp.CleavageInhibitors);
+                String outStr = FindMissedCleavagePeptides(inp.fastaMap, apStr, psm.PepSeq, psm.TheoPepMass, TargetMass, inp.aa.AAMonoMassMap, psm.MassAbsThreshold, inp.CleavageSites, inp.CleavageInhibitors);
                 if(!outStr.isEmpty())
                 {
                     String[] tStrAry = outStr.split("[$\\@]");

@@ -20,7 +20,9 @@
 package crystalc;
 
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.concurrent.Callable;
 
 import umich.ms.datatypes.scan.IScan;
@@ -60,14 +62,14 @@ public class WorkerThread implements Callable<ds_PSM>
         this._psm.DeltaMass = searchHit.getMassdiff();
         this._psm.UsePredictedMz = this._inp.UsePredictedMz;
 
-        String AlproteinStr = "";
+        Set<String> alternativeProteins = new TreeSet<>();
         List<AltProteinDataType> AlProteinLi = searchHit.getAlternativeProtein();
         for(AltProteinDataType AlProtein : AlProteinLi)
         {
             String[] sAry = AlProtein.getProtein().split(" ");
-            AlproteinStr += sAry[0] + ",";
+            alternativeProteins.add(sAry[0].trim());
         }
-        this._psm.AlternativeProteins = (AlproteinStr.isEmpty()) ? "" : AlproteinStr.substring(0, AlproteinStr.lastIndexOf(','));
+        this._psm.AlternativeProteins = new TreeSet<>(alternativeProteins);
         this._psm.MassAbsThreshold = (this._psm.ObvPepMass * inp.MassTol);
 
         this._templates = templates;
