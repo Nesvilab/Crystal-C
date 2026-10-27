@@ -195,27 +195,33 @@ public class p_ProcessPSM
         String result = "";
 
         double MinLMassDif = 1000000;
+        double lPepMass = 0;
         String lPepSeq = "";
         for(int i=1 ; i<= PepSeq.length() ; i++) //check from left side of sequence
         {
-            double lMassDif = Math.abs(TheoPepMass - p_Operator.CalculatePepMonoMass(PepSeq.substring(0, i), AAMonoMassMap) - ExpPepMass);
+            double tPepMass = TheoPepMass - p_Operator.CalculatePepMonoMass(PepSeq.substring(0, i), AAMonoMassMap);
+            double lMassDif = Math.abs(tPepMass - ExpPepMass);
             if(lMassDif <= MassAbsThreshold)
             {
                 lPepSeq = PepSeq.substring(i, PepSeq.length());
                 MinLMassDif = lMassDif;
+                lPepMass = tPepMass;
                 break;
             }
         }
 
         double MinRMassDif = 1000000;
+        double rPepMass = 0;
         String rPepSeq = "";
         for(int i = PepSeq.length() ; i>=0 ; i--)
         {
-            double rMassDif = Math.abs(TheoPepMass - p_Operator.CalculatePepMonoMass(PepSeq.substring(i, PepSeq.length()), AAMonoMassMap) - ExpPepMass);
+            double tPepMass = TheoPepMass - p_Operator.CalculatePepMonoMass(PepSeq.substring(i, PepSeq.length()), AAMonoMassMap);
+            double rMassDif = Math.abs(tPepMass - ExpPepMass);
             if(rMassDif <= MassAbsThreshold)
             {
                 rPepSeq = PepSeq.substring(0, i);
                 MinRMassDif = rMassDif;
+                rPepMass = tPepMass;
                 break;
             }
         }
@@ -224,12 +230,12 @@ public class p_ProcessPSM
         if ((Math.abs(MinLMassDif) <= MassAbsThreshold) && (Math.abs(MinLMassDif) <= MinRMassDif))
         {
             //bestResult = lPepSeq + "@" + MinLMassDif + "@"  + p_Operator.CalculatePepMonoMass(lPepSeq, AAMonoMassMap);
-            bestResult = lPepSeq + "@" + MinLMassDif + "@"  + (MinLMassDif+ExpPepMass);
+            bestResult = lPepSeq + "@" + MinLMassDif + "@"  + lPepMass;
         }
         else if (Math.abs(MinRMassDif) <= MassAbsThreshold)
         {
             //bestResult = rPepSeq + "@" + MinRMassDif + "@"  + p_Operator.CalculatePepMonoMass(rPepSeq, AAMonoMassMap);
-            bestResult = rPepSeq + "@" + MinRMassDif + "@"  + (MinRMassDif+ExpPepMass);
+            bestResult = rPepSeq + "@" + MinRMassDif + "@"  + rPepMass;
         }
 
         //List all possible peptides
@@ -240,7 +246,7 @@ public class p_ProcessPSM
             String NextAA = "-";
 
             //result += lPepSeq + "~" + MinLMassDif + "~" + p_Operator.CalculatePepMonoMass(lPepSeq, AAMonoMassMap) + "~" + PreviousAA + "~" + NextAA + "~-~false" + "&";
-            result += lPepSeq + "~" + MinLMassDif + "~" + (MinLMassDif+ExpPepMass) + "~" + PreviousAA + "~" + NextAA + "~-~false" + "&";
+            result += lPepSeq + "~" + MinLMassDif + "~" + lPepMass + "~" + PreviousAA + "~" + NextAA + "~-~false" + "&";
         }
         if(!rPepSeq.isEmpty())
         {
@@ -248,7 +254,7 @@ public class p_ProcessPSM
             String NextAA = (rPepSeq.length() < PepSeq.length()) ? String.valueOf(PepSeq.charAt(rPepSeq.length())) : "-";
 
             //result += rPepSeq + "~" + MinRMassDif +"~" + p_Operator.CalculatePepMonoMass(rPepSeq, AAMonoMassMap) + "~" + PreviousAA + "~" + NextAA + "~-~false" +  "&";
-            result += rPepSeq + "~" + MinRMassDif +"~" + (MinRMassDif+ExpPepMass) + "~" + PreviousAA + "~" + NextAA + "~-~false" +  "&";
+            result += rPepSeq + "~" + MinRMassDif +"~" + rPepMass + "~" + PreviousAA + "~" + NextAA + "~-~false" +  "&";
         }
 
         if(!bestResult.isEmpty())
