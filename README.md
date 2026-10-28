@@ -43,6 +43,8 @@ For other tools developed by the Nesvizhskii lab, see our website: www.nesvilab.
 
 # Commands
 
+Crystal-C requires Java 17 or higher.
+
 (for mzML files) 
 `java -Xmx53G -cp "CrystalC-1.2.1.jar" crystalc.Run crystalc.params *.pepXML`
 
