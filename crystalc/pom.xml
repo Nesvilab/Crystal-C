@@ -40,6 +40,13 @@
             <artifactId>batmass-io</artifactId>
             <version>${ver.batmass.io}</version>
             <scope>compile</scope>
+            <!-- batmass-io is a fat jar that already contains its dependencies -->
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
