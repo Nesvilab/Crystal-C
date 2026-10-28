@@ -13,7 +13,7 @@
         <target.version>9</target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <ver.batmass.io>1.36.5</ver.batmass.io>
+        <ver.batmass.io>1.38.0</ver.batmass.io>
     </properties>
 
     <profiles>
@@ -105,7 +105,7 @@
                 </executions>
             </plugin>
 
-            <!--install msftbx-grpc from the 'lib' directory into local maven repo on 'clean' task-->
+            <!--install batmass-io and grppr from the 'lib' directory into local maven repo on 'clean' task-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
