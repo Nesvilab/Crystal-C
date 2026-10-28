@@ -52,8 +52,9 @@ public class p_PredictMonoisotope
 
         this._MinMzRange = this._PrecursorMz - this._MzTol;
         this._MaxMzRange = this._PrecursorMz + this._MzTol;
-        this._MinRtRange = ((this._RtAry[this._PrecursorScanNum-1] - this._RtTol) > this._Scans.getRtMin()) ? (this._RtAry[this._PrecursorScanNum] - this._RtTol) : this._Scans.getRtMin();
-        this._MaxRtRange = ((this._RtAry[this._PrecursorScanNum-1] + this._RtTol) <= this._Scans.getRtMax())? (this._RtAry[this._PrecursorScanNum] + this._RtTol) : this._Scans.getRtMax();
+        double PreviousRt = (this._RtAry[this._PrecursorScanNum-1] != null) ? this._RtAry[this._PrecursorScanNum-1] : this._RtAry[this._PrecursorScanNum]; //The scan before the precursor scan is missing if scan numbers have gaps.
+        this._MinRtRange = ((PreviousRt - this._RtTol) > this._Scans.getRtMin()) ? (this._RtAry[this._PrecursorScanNum] - this._RtTol) : this._Scans.getRtMin();
+        this._MaxRtRange = ((PreviousRt + this._RtTol) <= this._Scans.getRtMax())? (this._RtAry[this._PrecursorScanNum] + this._RtTol) : this._Scans.getRtMax();
     }
 
     public void GetRepresentative()

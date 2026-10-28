@@ -90,6 +90,9 @@ public class WorkerThread implements Callable<ds_PSM>
             //Get precursor spectrum
             IScan PsmScan = this._scans.getScanByNum(this._psm.PsmScanNum);
             int PrecursorScanNum = PsmScan.getPrecursor().getParentScanNum()!=null?PsmScan.getPrecursor().getParentScanNum() : -1;
+            if((PrecursorScanNum>=0) && (!Num2ScanMap.containsKey(PrecursorScanNum))){ //The precursor spectrum is not in the file: handle it as if there were no precursor spectrum.
+                PrecursorScanNum = -1;
+            }
 
             //Get the precursor window in the parent spectrum
             double StartMz = (PsmScan.getPrecursor().getMzRangeStart() != null) ? PsmScan.getPrecursor().getMzRangeStart() : (this._psm.ObvMz - this._inp.PrecursorIsolationWindow);

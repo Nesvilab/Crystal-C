@@ -109,7 +109,8 @@ public class Run
     private static Double[] GetRT(IScanCollection scans)
     {
         TreeMap<Integer, IScan> Num2ScanMap = scans.getMapNum2scan();
-        Double[] RtAry = new Double[Num2ScanMap.size()+2];
+        int MaxScanNum = Num2ScanMap.isEmpty() ? 0 : Num2ScanMap.lastKey(); //Scan numbers can have gaps, so the largest one can exceed the number of scans.
+        Double[] RtAry = new Double[Math.max(Num2ScanMap.size(), MaxScanNum)+2];
         try
         {
             RtAry[0] = 0.0;
