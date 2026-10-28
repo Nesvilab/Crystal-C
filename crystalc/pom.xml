@@ -121,7 +121,7 @@
                             <artifactId>batmass-io</artifactId>
                             <version>${ver.batmass.io}</version>
                             <packaging>jar</packaging>
-                            <generatePom>true</generatePom>
+                            <pomFile>${basedir}/lib/batmass-io-${ver.batmass.io}.pom</pomFile>
                         </configuration>
                         <goals>
                             <goal>install-file</goal>
